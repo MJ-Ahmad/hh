@@ -1,0 +1,504 @@
+===========================================
+GITHUB CLI (gh) WORKFLOW CHECKLIST
+Termux + Git + GitHub
+Personal Reference Template
+===========================================
+
+-------------------------------------------
+LOGIN STATUS CHECK
+-------------------------------------------
+
+gh auth status
+
+-------------------------------------------
+VERSION CHECK
+-------------------------------------------
+
+git --version
+
+gh --version
+
+-------------------------------------------
+CREATE PROJECT DIRECTORY
+-------------------------------------------
+
+mkdir my-project
+
+cd my-project
+
+-------------------------------------------
+CHECK CURRENT LOCATION
+-------------------------------------------
+
+pwd
+
+-------------------------------------------
+LIST FILES AND DIRECTORIES
+-------------------------------------------
+
+ls
+
+ls -la
+
+tree
+
+-------------------------------------------
+INITIALIZE GIT
+-------------------------------------------
+
+git init
+
+-------------------------------------------
+SET MAIN BRANCH
+-------------------------------------------
+
+git branch -M main
+
+Check current branch:
+
+git branch
+
+-------------------------------------------
+CREATE README FILE
+-------------------------------------------
+
+echo "# My Project" > README.md
+
+-------------------------------------------
+CHECK REPOSITORY STATUS
+-------------------------------------------
+
+git status
+
+-------------------------------------------
+STAGE FILES
+-------------------------------------------
+
+Add all files:
+
+git add .
+
+Add a specific file:
+
+git add README.md
+
+-------------------------------------------
+CREATE COMMIT
+-------------------------------------------
+
+git commit -m "Initial commit"
+
+-------------------------------------------
+CREATE GITHUB REPOSITORY
+-------------------------------------------
+
+Public repository:
+
+gh repo create my-project --public
+
+Private repository:
+
+gh repo create my-project --private
+
+-------------------------------------------
+CREATE REPOSITORY + ADD REMOTE + PUSH
+-------------------------------------------
+
+gh repo create my-project \
+  --public \
+  --source=. \
+  --remote=origin \
+  --push
+
+-------------------------------------------
+CHECK REMOTE CONFIGURATION
+-------------------------------------------
+
+git remote -v
+
+-------------------------------------------
+ADD REMOTE MANUALLY
+-------------------------------------------
+
+git remote add origin https://github.com/USERNAME/my-project.git
+
+-------------------------------------------
+REMOVE REMOTE
+-------------------------------------------
+
+git remote remove origin
+
+-------------------------------------------
+CHANGE REMOTE URL
+-------------------------------------------
+
+git remote set-url origin https://github.com/USERNAME/my-project.git
+
+-------------------------------------------
+CHECK REMOTE URL
+-------------------------------------------
+
+git remote get-url origin
+
+-------------------------------------------
+FIRST PUSH
+-------------------------------------------
+
+git push -u origin main
+
+-------------------------------------------
+REGULAR PUSH
+-------------------------------------------
+
+git push
+
+-------------------------------------------
+PULL LATEST CHANGES
+-------------------------------------------
+
+git pull
+
+git pull origin main
+
+-------------------------------------------
+FETCH REMOTE CHANGES
+-------------------------------------------
+
+git fetch
+
+git fetch --all
+
+-------------------------------------------
+VIEW REPOSITORY INFORMATION
+-------------------------------------------
+
+gh repo view
+
+-------------------------------------------
+OPEN REPOSITORY IN BROWSER
+-------------------------------------------
+
+gh repo view --web
+
+OR
+
+gh browse
+
+-------------------------------------------
+LIST MY REPOSITORIES
+-------------------------------------------
+
+gh repo list
+
+-------------------------------------------
+CLONE A REPOSITORY
+-------------------------------------------
+
+gh repo clone USERNAME/repository-name
+
+Example:
+
+gh repo clone mjahmad/my-project
+
+-------------------------------------------
+CHECK CURRENT BRANCH
+-------------------------------------------
+
+git branch
+
+git branch -a
+
+-------------------------------------------
+CREATE A NEW BRANCH
+-------------------------------------------
+
+git checkout -b feature-name
+
+OR
+
+git switch -c feature-name
+
+-------------------------------------------
+SWITCH BRANCH
+-------------------------------------------
+
+git checkout main
+
+OR
+
+git switch main
+
+-------------------------------------------
+DELETE LOCAL BRANCH
+-------------------------------------------
+
+git branch -d branch-name
+
+-------------------------------------------
+DELETE FORCEFULLY
+-------------------------------------------
+
+git branch -D branch-name
+
+-------------------------------------------
+MERGE BRANCH
+-------------------------------------------
+
+git checkout main
+
+git merge feature-name
+
+-------------------------------------------
+VIEW COMMIT HISTORY
+-------------------------------------------
+
+git log
+
+git log --oneline
+
+git log --graph
+
+git log --oneline --graph --all
+
+-------------------------------------------
+VIEW FILE CHANGES
+-------------------------------------------
+
+git diff
+
+git diff --staged
+
+-------------------------------------------
+VIEW TRACKED FILES
+-------------------------------------------
+
+git ls-files
+
+-------------------------------------------
+UNSTAGE FILES
+-------------------------------------------
+
+git restore --staged filename
+
+-------------------------------------------
+RESTORE FILE CHANGES
+-------------------------------------------
+
+git restore filename
+
+-------------------------------------------
+RENAME FILE
+-------------------------------------------
+
+git mv old-name new-name
+
+-------------------------------------------
+DELETE FILE
+-------------------------------------------
+
+git rm filename
+
+-------------------------------------------
+CREATE .GITIGNORE
+-------------------------------------------
+
+touch .gitignore
+
+Example:
+
+echo "node_modules/" >> .gitignore
+
+-------------------------------------------
+CHECK CONFIGURATION
+-------------------------------------------
+
+git config --list
+
+-------------------------------------------
+SET USER NAME
+-------------------------------------------
+
+git config --global user.name "Your Name"
+
+-------------------------------------------
+SET EMAIL
+-------------------------------------------
+
+git config --global user.email "your@email.com"
+
+-------------------------------------------
+CHECK USER INFORMATION
+-------------------------------------------
+
+gh api user
+
+-------------------------------------------
+CHECK AUTHENTICATION STATUS
+-------------------------------------------
+
+gh auth status
+
+-------------------------------------------
+REFRESH AUTHENTICATION
+-------------------------------------------
+
+gh auth login
+
+-------------------------------------------
+LOGOUT
+-------------------------------------------
+
+gh auth logout
+
+-------------------------------------------
+CREATE ISSUE
+-------------------------------------------
+
+gh issue create
+
+-------------------------------------------
+LIST ISSUES
+-------------------------------------------
+
+gh issue list
+
+-------------------------------------------
+CREATE PULL REQUEST
+-------------------------------------------
+
+gh pr create
+
+-------------------------------------------
+LIST PULL REQUESTS
+-------------------------------------------
+
+gh pr list
+
+-------------------------------------------
+VIEW PULL REQUEST
+-------------------------------------------
+
+gh pr view
+
+-------------------------------------------
+CHECK WORKFLOW RUNS
+-------------------------------------------
+
+gh run list
+
+-------------------------------------------
+WATCH WORKFLOW
+-------------------------------------------
+
+gh run watch
+
+-------------------------------------------
+RENAME REPOSITORY
+-------------------------------------------
+
+gh repo rename NEW-NAME
+
+-------------------------------------------
+DELETE REPOSITORY
+-------------------------------------------
+
+gh repo delete REPOSITORY-NAME
+
+-------------------------------------------
+VERIFY EVERYTHING
+-------------------------------------------
+
+gh auth status
+
+git status
+
+git branch
+
+git remote -v
+
+-------------------------------------------
+MINIMUM DAILY WORKFLOW
+-------------------------------------------
+
+git status
+
+git add .
+
+git commit -m "Describe changes"
+
+git push
+
+-------------------------------------------
+NEW PROJECT QUICK START
+-------------------------------------------
+
+mkdir my-project
+
+cd my-project
+
+git init
+
+git branch -M main
+
+echo "# My Project" > README.md
+
+git add .
+
+git commit -m "Initial commit"
+
+gh repo create my-project \
+  --public \
+  --source=. \
+  --remote=origin \
+  --push
+
+-------------------------------------------
+EXISTING PROJECT QUICK START
+-------------------------------------------
+
+cd ~/projects/my-project
+
+git init
+
+git branch -M main
+
+git add .
+
+git commit -m "Initial commit"
+
+gh repo create my-project \
+  --public \
+  --source=. \
+  --remote=origin \
+  --push
+
+===========================================
+CUSTOM COMMANDS SECTION
+(Add Your Own Commands Below)
+===========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===========================================
+END OF REFERENCE
+===========================================
