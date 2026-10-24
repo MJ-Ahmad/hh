@@ -1,0 +1,659 @@
+====================================================================
+GIT + GITHUB PROFESSIONAL WORKFLOW HANDBOOK
+Termux | Linux | Git | GitHub CLI (gh)
+Personal Operating Manual
+====================================================================
+
+AUTHOR
+MJ Ahmad
+
+PURPOSE
+Long-term repository management
+Worktree-based development
+Multi-branch workflows
+Safe backup strategy
+Professional Git operations
+
+====================================================================
+PROJECT ROOT STRUCTURE
+====================================================================
+
+~/data/project/
+
+├── repo/
+│   ├── mj/
+│   └── qf/
+│
+├── worktrees/
+│   ├── mj/
+│   └── qf/
+│
+├── backup/
+│
+├── archive/
+│
+└── docs/
+
+====================================================================
+REPOSITORY STRUCTURE
+====================================================================
+
+~/data/project/repo/mj
+
+├── .git
+├── README.md
+├── docs
+├── src
+└── assets
+
+
+~/data/project/repo/qf
+
+├── .git
+├── README.md
+├── docs
+├── src
+└── assets
+
+====================================================================
+BRANCH STRATEGY
+====================================================================
+
+main
+│
+├── dev
+│
+├── workspace
+│
+├── backup
+│
+├── archive
+│
+├── muster
+│
+└── junk
+
+====================================================================
+BRANCH PURPOSES
+====================================================================
+
+main
+
+Production-ready branch.
+Stable code only.
+
+--------------------------------------------------
+
+dev
+
+Primary development branch.
+Daily coding work.
+
+--------------------------------------------------
+
+workspace
+
+Temporary experimentation.
+Testing ideas.
+
+--------------------------------------------------
+
+backup
+
+Emergency backup snapshots.
+
+--------------------------------------------------
+
+archive
+
+Historical preservation.
+
+Never modify old archived states.
+
+--------------------------------------------------
+
+muster
+
+Review area before merge.
+
+--------------------------------------------------
+
+junk
+
+Disposable workspace.
+
+Local temporary changes.
+
+====================================================================
+BRANCH CREATION
+====================================================================
+
+git branch dev
+
+git branch workspace
+
+git branch backup
+
+git branch archive
+
+git branch muster
+
+git branch junk
+
+Check:
+
+git branch
+
+====================================================================
+WORKTREE ROOT SETUP
+====================================================================
+
+mkdir -p ~/data/project/worktrees
+
+mkdir -p ~/data/project/worktrees/mj
+
+mkdir -p ~/data/project/worktrees/qf
+
+====================================================================
+MJ WORKTREE CREATION
+====================================================================
+
+cd ~/data/project/repo/mj
+
+git worktree add \
+~/data/project/worktrees/mj/main \
+main
+
+git worktree add \
+~/data/project/worktrees/mj/dev \
+dev
+
+git worktree add \
+~/data/project/worktrees/mj/workspace \
+workspace
+
+git worktree add \
+~/data/project/worktrees/mj/backup \
+backup
+
+git worktree add \
+~/data/project/worktrees/mj/archive \
+archive
+
+git worktree add \
+~/data/project/worktrees/mj/muster \
+muster
+
+git worktree add \
+~/data/project/worktrees/mj/junk \
+junk
+
+====================================================================
+QF WORKTREE CREATION
+====================================================================
+
+cd ~/data/project/repo/qf
+
+git worktree add \
+~/data/project/worktrees/qf/main \
+main
+
+git worktree add \
+~/data/project/worktrees/qf/dev \
+dev
+
+git worktree add \
+~/data/project/worktrees/qf/workspace \
+workspace
+
+git worktree add \
+~/data/project/worktrees/qf/backup \
+backup
+
+git worktree add \
+~/data/project/worktrees/qf/archive \
+archive
+
+git worktree add \
+~/data/project/worktrees/qf/muster \
+muster
+
+git worktree add \
+~/data/project/worktrees/qf/junk \
+junk
+
+====================================================================
+WORKTREE STATUS CHECK
+====================================================================
+
+git worktree list
+
+====================================================================
+REPOSITORY HEALTH CHECK
+====================================================================
+
+pwd
+
+git status
+
+git branch
+
+git branch --show-current
+
+git remote -v
+
+git log --oneline -10
+
+====================================================================
+GOLDEN SAFETY RULE
+====================================================================
+
+ALWAYS RUN:
+
+pwd
+
+git branch --show-current
+
+git remote -v
+
+BEFORE:
+
+git push
+
+====================================================================
+DAILY DEVELOPMENT WORKFLOW
+====================================================================
+
+cd worktree
+
+git status
+
+git pull
+
+edit files
+
+git add .
+
+git commit -m "Describe your changes"
+
+git push
+
+====================================================================
+QUICK PUSH WORKFLOW
+====================================================================
+
+git add .
+
+git commit -m "Update"
+
+git push
+
+====================================================================
+QUICK PULL WORKFLOW
+====================================================================
+
+git pull origin main
+
+====================================================================
+NEW REPOSITORY CREATION
+====================================================================
+
+mkdir my-project
+
+cd my-project
+
+git init
+
+git branch -M main
+
+echo "# My Project" > README.md
+
+git add .
+
+git commit -m "Initial commit"
+
+gh repo create my-project \
+--public \
+--source=. \
+--remote=origin \
+--push
+
+====================================================================
+REPOSITORY CLONE
+====================================================================
+
+gh repo clone OWNER/REPOSITORY
+
+Example
+
+gh repo clone mj-ahmad/project
+
+====================================================================
+REMOTE MANAGEMENT
+====================================================================
+
+Check Remotes
+
+git remote -v
+
+Add Remote
+
+git remote add origin URL
+
+Remove Remote
+
+git remote remove origin
+
+Update Remote
+
+git remote set-url origin URL
+
+====================================================================
+BACKUP OPERATIONS
+====================================================================
+
+Create Backup Branch
+
+git checkout backup
+
+git merge main
+
+git push origin backup
+
+--------------------------------------------------
+
+Create Local Bundle Backup
+
+git bundle create repository.bundle --all
+
+Restore:
+
+git clone repository.bundle restored-project
+
+====================================================================
+ARCHIVE OPERATIONS
+====================================================================
+
+git checkout archive
+
+git merge main
+
+git push origin archive
+
+====================================================================
+RELEASE TAGGING
+====================================================================
+
+Create Tag
+
+git tag v1.0.0
+
+Push Tag
+
+git push origin v1.0.0
+
+Push All Tags
+
+git push --tags
+
+View Tags
+
+git tag
+
+====================================================================
+LOG VIEWING
+====================================================================
+
+git log
+
+git log --oneline
+
+git log --graph
+
+git log --oneline --graph --all
+
+====================================================================
+DIFF VIEWING
+====================================================================
+
+git diff
+
+git diff --staged
+
+====================================================================
+RESTORE OPERATIONS
+====================================================================
+
+Restore File
+
+git restore filename
+
+Restore Stage
+
+git restore --staged filename
+
+====================================================================
+CLEANUP OPERATIONS
+====================================================================
+
+Delete Branch
+
+git branch -d branch-name
+
+Force Delete
+
+git branch -D branch-name
+
+Remove Worktree
+
+git worktree remove PATH
+
+Prune Worktrees
+
+git worktree prune
+
+====================================================================
+GITHUB CLI OPERATIONS
+====================================================================
+
+Check Login
+
+gh auth status
+
+Login
+
+gh auth login
+
+Logout
+
+gh auth logout
+
+User Info
+
+gh api user
+
+List Repositories
+
+gh repo list
+
+View Repository
+
+gh repo view
+
+Open Repository
+
+gh repo view --web
+
+====================================================================
+RECOMMENDED COMMIT STYLE
+====================================================================
+
+feat: add login page
+
+fix: resolve crash issue
+
+docs: update handbook
+
+refactor: cleanup workflow
+
+style: formatting changes
+
+test: add unit tests
+
+chore: maintenance tasks
+
+====================================================================
+LONG-TERM PERSONAL RULES
+====================================================================
+
+Never push blindly.
+
+Always check:
+
+pwd
+
+git branch --show-current
+
+git remote -v
+
+Always pull before starting work.
+
+Always commit before switching context.
+
+Keep main branch clean.
+
+Use dev for development.
+
+Use workspace for experiments.
+
+Use backup for safety snapshots.
+
+Use archive for historical preservation.
+
+Create tags for major releases.
+
+Keep commit messages meaningful.
+
+====================================================================
+CUSTOM COMMANDS
+====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================================================
+CUSTOM ALIASES
+====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================================================
+PERSONAL NOTES
+====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================================================
+END OF HANDBOOK
+====================================================================
